@@ -15,7 +15,7 @@ struct ShrinkingCircles: Shape {
         var path = Path()
         
         // Loop to make smaller circles
-        for i in 0...7 {
+        for i in 0...3 {
          
             let j = CGFloat(i)
             
@@ -32,10 +32,47 @@ struct ShrinkingCircles: Shape {
     
 }
 
+struct ShrinkingCirclesRecursively: Shape {
+    
+    // MARK: Stored property
+    let desiredDepth: Int
+    
+    // MARK: Functions
+    func path(in rect: CGRect) -> Path {
+        // Make the path
+        var path = Path()
+        
+        // Begin calling the recursive helper
+        let allThePaths = recursiveHelper(currentDepth: 1)
+        path.addPath(allThePaths)
+        
+        // Return the path
+        return path
+    }
+    
+    func recursiveHelper(currentDepth: Int) -> Path {
+        
+        // Make the path
+        var path = Path()
+        
+        // Return the path
+        return path
+    }
+    
+    
+}
+
+
 struct ContentView: View {
     var body: some View {
-        ShrinkingCircles()
-            .stroke()
+        VStack {
+            ShrinkingCircles()
+                .stroke()
+            
+            ShrinkingCirclesRecursively(desiredDepth: 4)
+                .stroke()
+
+        }
     }
 }
 
