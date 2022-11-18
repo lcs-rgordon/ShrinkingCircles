@@ -58,17 +58,20 @@ struct ShrinkingCirclesRecursively: Shape {
         
         // Draw the circle for the current depth
         let j = CGFloat(currentDepth - 1)
-        path.addEllipse(in: CGRect(origin: CGPoint(x: rect.midX - rect.midY + 25 * j, y: 0 + 25 * j),
+        path.addEllipse(in: CGRect(origin: CGPoint(x: rect.midX - rect.midY + 25 * j,
+                                                   y: 0 + 25 * j),
                                    size: CGSize(width: rect.height - 50 * j,
                                                 height: rect.height - 50 * j)))
         
         // Decide whether to call the function again (recurse)
+        if currentDepth < desiredDepth {
+            let pathForNextCircle = recursiveHelper(currentDepth: currentDepth + 1, drawingIn: rect)
+            path.addPath(pathForNextCircle)
+        }
         
         // Return the path
         return path
     }
-    
-    
 }
 
 
